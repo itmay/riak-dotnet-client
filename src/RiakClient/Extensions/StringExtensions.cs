@@ -58,7 +58,7 @@ namespace RiakClient.Extensions
 
         internal static string UrlEncoded(this string value)
         {
-			return value;// HttpUtility.UrlEncode(value);
+			return System.Net.WebUtility.UrlEncode(value);
         }
 
         internal static bool IsUserIntegerKey(this string value)
