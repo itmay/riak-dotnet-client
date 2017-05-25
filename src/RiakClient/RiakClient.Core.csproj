@@ -6,6 +6,8 @@
     <Description>.NET Client for the Riak distributed database.</Description>
     <Product>Riak .NET Client</Product>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
