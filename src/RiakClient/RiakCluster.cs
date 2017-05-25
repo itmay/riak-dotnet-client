@@ -17,6 +17,8 @@
 // under the License.
 // </copyright>
 
+using Microsoft.Extensions.Configuration;
+
 namespace RiakClient
 {
     using System;
@@ -104,9 +106,9 @@ namespace RiakClient
         /// </summary>
         /// <param name="configSectionName">The name of the configuration section to load the settings from.</param>
         /// <returns>A fully configured <see cref="IRiakEndPoint"/></returns>
-        public static IRiakEndPoint FromConfig(string configSectionName)
+        public static IRiakEndPoint FromConfig(IConfiguration configuration, string configSectionName)
         {
-            return new RiakCluster(RiakClusterConfiguration.LoadFromConfig(configSectionName), new RiakConnectionFactory());
+            return new RiakCluster(RiakClusterConfiguration.LoadFromConfig(configuration, configSectionName), new RiakConnectionFactory());
         }
 
         /// <summary>

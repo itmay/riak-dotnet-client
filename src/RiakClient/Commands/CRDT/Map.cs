@@ -63,11 +63,13 @@ namespace RiakClient.Commands.CRDT
             {
             }
 
-            protected MapOf(SerializationInfo info, StreamingContext context)
+#if !NETCOREAPP1_1
+			protected MapOf(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
-        }
+#endif
+		}
 
         [Serializable]
         public class Counter : MapOf<long>
@@ -76,12 +78,14 @@ namespace RiakClient.Commands.CRDT
             {
             }
 
-            protected Counter(SerializationInfo info, StreamingContext context)
+#if !NETCOREAPP1_1
+			protected Counter(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
+#endif
 
-            public long GetValue(RiakString key)
+			public long GetValue(RiakString key)
             {
                 long value;
                 if (TryGetValue(key, out value))
@@ -102,12 +106,14 @@ namespace RiakClient.Commands.CRDT
             {
             }
 
-            protected Set(SerializationInfo info, StreamingContext context)
+#if !NETCOREAPP1_1
+			protected Set(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
+#endif
 
-            public IEnumerable<string> GetValue(RiakString key)
+			public IEnumerable<string> GetValue(RiakString key)
             {
                 return GetValueAsRiakStrings(key).Select(v => (string)v);
             }
@@ -146,12 +152,14 @@ namespace RiakClient.Commands.CRDT
             {
             }
 
-            protected Register(SerializationInfo info, StreamingContext context)
+#if !NETCOREAPP1_1
+			protected Register(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
+#endif
 
-            public string GetValue(RiakString key)
+			public string GetValue(RiakString key)
             {
                 return (string)GetValueAsRiakString(key);
             }
@@ -177,10 +185,12 @@ namespace RiakClient.Commands.CRDT
             {
             }
 
-            protected Flag(SerializationInfo info, StreamingContext context)
+#if !NETCOREAPP1_1
+			protected Flag(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
-        }
+#endif
+		}
     }
 }

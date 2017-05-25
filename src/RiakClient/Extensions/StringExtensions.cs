@@ -21,12 +21,14 @@ namespace RiakClient.Extensions
 {
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Web;
+#if !NETCOREAPP1_1
+	using System.Web;
+#endif
 
-    /// <summary>
-    /// Extension methods to assist with conversion between Riak byte[] and strings.
-    /// </summary>
-    public static class StringExtensions
+	/// <summary>
+	/// Extension methods to assist with conversion between Riak byte[] and strings.
+	/// </summary>
+	public static class StringExtensions
     {
         // + - && || ! ( ) { } [ ] ^ " ~ * ? : \
         private const string SearchTermPattern = @"[\+\-!\(\)\{\}\[\]^\""~\*\?\:\\]{1}";
@@ -56,7 +58,7 @@ namespace RiakClient.Extensions
 
         internal static string UrlEncoded(this string value)
         {
-            return HttpUtility.UrlEncode(value);
+			return value;// HttpUtility.UrlEncode(value);
         }
 
         internal static bool IsUserIntegerKey(this string value)

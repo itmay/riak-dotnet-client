@@ -22,8 +22,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Riak .NET Client")]
-[assembly: AssemblyDescription(".NET Client for the Riak distributed database.")]
+//[assembly: AssemblyTitle("Riak .NET Client")]
+//[assembly: AssemblyDescription(".NET Client for the Riak distributed database.")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
 [assembly: Guid("080E5954-854C-4B0B-AEA0-5BE8D7523817")]

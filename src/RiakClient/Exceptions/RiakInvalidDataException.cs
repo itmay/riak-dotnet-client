@@ -17,16 +17,21 @@
 // under the License.
 // </copyright>
 
+using System.Threading.Tasks;
+
 namespace RiakClient.Exceptions
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
-    /// <summary>
-    /// Represents an error that occurs when an invalid message code is read from a Riak response.
-    /// </summary>
-    [Serializable]
+#if !NETCOREAPP1_1
+	using System.Security.Permissions;
+#endif
+
+	/// <summary>
+	/// Represents an error that occurs when an invalid message code is read from a Riak response.
+	/// </summary>
+	[Serializable]
     public class RiakInvalidDataException : RiakException
     {
         private readonly byte messageCode;
@@ -67,17 +72,19 @@ namespace RiakClient.Exceptions
             this.messageCode = messageCode;
         }
 
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+#if !NETCOREAPP1_1
+		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         protected RiakInvalidDataException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.messageCode = info.GetByte("MessageCode");
         }
+#endif
 
-        /// <summary>
-        /// The invalid message code that was read from the Riak response.
-        /// </summary>
-        public byte MessageCode
+		/// <summary>
+		/// The invalid message code that was read from the Riak response.
+		/// </summary>
+		public byte MessageCode
         {
             get
             {
@@ -85,10 +92,11 @@ namespace RiakClient.Exceptions
             }
         }
 
-        /// <inheritdoc/>
-        /// <exception cref="ArgumentNullException">The value of '<paramref name="info"/>' cannot be null. </exception>
-        /// <exception cref="SerializationException">A value has already been associated with '<paramref name="name" />'.</exception>
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+#if !NETCOREAPP1_1
+		/// <inheritdoc/>
+		/// <exception cref="ArgumentNullException">The value of '<paramref name="info"/>' cannot be null. </exception>
+		/// <exception cref="SerializationException">A value has already been associated with '<paramref name="name" />'.</exception>
+		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -100,5 +108,6 @@ namespace RiakClient.Exceptions
 
             base.GetObjectData(info, context);
         }
-    }
+#endif
+	}
 }
